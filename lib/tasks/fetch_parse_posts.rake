@@ -25,7 +25,7 @@ def fetch_individual_post(url, news_link, title_css, content_css)
 
   response = openai_client.completions(
     engine: "text-davinci-003",
-    prompt: "Summarize the following article in 50 words:\n\n#{content}",
+    prompt: "Summarize the following article in English 50 words or less:\n\n#{content}",
     max_tokens: 150
   )
 
@@ -80,17 +80,6 @@ namespace :fetch_posts do
     end
   end
 
-  task fetch_geekwire_posts: :environment do
-    url = "https://www.geekwire.com/channel/artificial-intelligence/"
-    parsed_page = fetch_and_parse(url)
-    news_links = parsed_page.css('h2.entry-title a')
-
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1.entry-title', 'div.entry-content p')
-      puts "===== Geekwire Posts saved! ====="
-    end
-  end
-
   task fetch_openai_blog_posts: :environment do
     url = "https://openai.com/blog"
     parsed_page = fetch_and_parse(url)
@@ -113,14 +102,14 @@ namespace :fetch_posts do
     end
   end
 
-  task fetch_techcrunch_posts: :environment do
-    url = "https://techcrunch.com/category/artificial-intelligence/"
+  task fetch_itmedia_posts: :environment do
+    url = "https://www.itmedia.co.jp/news/subtop/aiplus/"
     parsed_page = fetch_and_parse(url)
-    news_links = parsed_page.css('a.post-block__title__link')
+    news_links = parsed_page.css('div.colBoxTitle h3 a')
 
     news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1', 'div.article-content')
-      puts "===== Tech Crunch Posts saved! ====="
+      fetch_individual_post(url, news_link, 'span.title__maintext', 'div#cmsBody p')
+      puts "===== IT Media Posts saved! ====="
     end
   end
   
