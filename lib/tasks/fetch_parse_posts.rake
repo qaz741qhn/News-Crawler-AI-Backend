@@ -84,12 +84,16 @@ namespace :fetch_posts do
     url = "https://openai.com/blog"
     parsed_page = fetch_and_parse(url)
     news_links = parsed_page.css('a.ui-link')
-
+  
+    news_links = news_links.select do |news_link|
+      news_link['href'].include?('/blog')
+    end
+  
     news_links.first(5).each do |news_link|
       fetch_individual_post(url, news_link, 'h1', 'div#content')
       puts "===== OpenAI Blog Posts saved! ====="
     end
-  end
+  end  
 
   task fetch_syncedreview_posts: :environment do
     url = "https://syncedreview.com/category/ai/"
@@ -102,15 +106,9 @@ namespace :fetch_posts do
     end
   end
 
-  task fetch_itmedia_posts: :environment do
-    url = "https://www.itmedia.co.jp/news/subtop/aiplus/"
-    parsed_page = fetch_and_parse(url)
-    news_links = parsed_page.css('div.colBoxTitle h3 a')
-
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'span.title__maintext', 'div#cmsBody p')
-      puts "===== IT Media Posts saved! ====="
-    end
+  task fetch_all: [:fetch_aibusiness_posts, :fetch_aidaily_posts, :fetch_google_ai_blog_posts, 
+    :fetch_venturebeat_posts, :fetch_openai_blog_posts, :fetch_syncedreview_posts] do
+    puts "===== All posts fetched! ====="
   end
   
 end

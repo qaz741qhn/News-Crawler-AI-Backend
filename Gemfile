@@ -41,6 +41,7 @@ gem 'httparty'
 gem 'open-uri'
 gem 'json'
 gem 'openai', '~> 0.3.0'
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
