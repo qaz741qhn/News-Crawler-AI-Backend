@@ -82,5 +82,4 @@ test:
 production:
   <<: *default
   database: ai_news_production
-  username: ai_news
-  password: <%= ENV["AI_NEWS_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
