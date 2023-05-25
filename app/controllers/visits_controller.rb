@@ -1,6 +1,4 @@
 class VisitsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def create
     @visit = Visit.new(visit_params)
 
