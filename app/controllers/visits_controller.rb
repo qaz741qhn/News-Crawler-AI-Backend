@@ -1,17 +1,18 @@
 class VisitsController < ApplicationController
   def create
-    @visit = Visit.new(visit_params)
+    # Get the current total count of visits
+    total_visits = Visit.sum(:count)
 
+    # Increase the total count by 1 for the new visitor
+    total_visits += 1
+
+    # Save the new visit
+    @visit = Visit.new(count: 1) # Every new visit has a count of 1
     if @visit.save
-      render json: @visit, status: :created
+      # Send back the new total count of visits
+      render json: { count: total_visits }, status: :created
     else
       render json: @visit.errors, status: :unprocessable_entity
     end
-  end
-
-  private
-
-  def visit_params
-    params.require(:visit).permit(:count)
   end
 end
