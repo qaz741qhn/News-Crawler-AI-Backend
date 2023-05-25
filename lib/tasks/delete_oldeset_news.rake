@@ -5,7 +5,7 @@ namespace :delete_oldest_news do
       News.order(date: :asc).limit(10).destroy_all
       puts "Deleted 10 oldest news"
     else
-      puts "Total news count is not over 300"
+      puts "Total news count is not over 200"
     end
   end
 end
