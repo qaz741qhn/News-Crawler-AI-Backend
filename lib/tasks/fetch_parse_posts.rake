@@ -3,7 +3,7 @@ def fetch_and_parse(url)
   Nokogiri::HTML(unparsed_page.body)
 end
 
-def fetch_individual_post(url, news_link, title_css, content_css)
+def fetch_individual_post(url, news_link, title_css, content_css, date_css)
   news_url = news_link['href'].start_with?("http") ? news_link['href'] : URI.join(url, news_link['href']).to_s
   puts "News url: #{news_url}"
 
@@ -21,6 +21,14 @@ def fetch_individual_post(url, news_link, title_css, content_css)
   content = news_parsed_page.css(content_css).text
   puts "Content: #{content}"
 
+  date_element = news_parsed_page.css(date_css).first
+  if date_element && date_element['datetime']
+    date = DateTime.parse(date_element['datetime'])
+  else
+    date = date_element ? DateTime.parse(date_element.text) : nil
+  end
+  puts "Date: #{date}"
+
   openai_client = OpenAI::Client.new(api_key: ENV["OPENAI_API_KEY"])
 
   response = openai_client.completions(
@@ -32,7 +40,7 @@ def fetch_individual_post(url, news_link, title_css, content_css)
   summary = response.choices.first.text.strip
   puts "Summary: #{summary}"
 
-  News.create(title: title, summary: summary, content: content, source: news_url) 
+  News.create(title: title, summary: summary, content: content, source: news_url, date: date) 
 end
 
 namespace :fetch_posts do
@@ -41,8 +49,8 @@ namespace :fetch_posts do
     parsed_page = fetch_and_parse(url)
     news_links = parsed_page.css('a.ListPreview-Title')
 
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1.ArticleBase-HeaderTitle', 'div.ArticleBase-BodyContent')
+    news_links.first(10).each do |news_link|
+      fetch_individual_post(url, news_link, 'h1.ArticleBase-HeaderTitle', 'div.ArticleBase-BodyContent p', 'p.Contributors-Date')
       puts "===== AI Business Posts saved! ====="
     end
   end
@@ -52,8 +60,8 @@ namespace :fetch_posts do
     parsed_page = fetch_and_parse(url)
     news_links = parsed_page.css('a.BlogList-item-title')
 
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1.BlogItem-title', 'div.sqs-layout')
+    news_links.first(10).each do |news_link|
+      fetch_individual_post(url, news_link, 'h1.BlogItem-title', 'div.sqs-layout p', 'time.Blog-meta-item--date')
       puts "===== AI Daily Posts saved! ====="
     end
   end
@@ -63,8 +71,8 @@ namespace :fetch_posts do
     parsed_page = fetch_and_parse(url)
     news_links = parsed_page.css('a.post-outer-container')
 
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1.hero__title', 'div.post-body-container')
+    news_links.first(10).each do |news_link|
+      fetch_individual_post(url, news_link, 'h1.hero__title', 'div.post-body-container p', 'time.eyebrow')
       puts "===== Google AI Blog Posts saved! ====="
     end
   end
@@ -74,8 +82,8 @@ namespace :fetch_posts do
     parsed_page = fetch_and_parse(url)
     news_links = parsed_page.css('a.ArticleListing__title-link')
 
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1.article-title', 'div.article-content p')
+    news_links.first(10).each do |news_link|
+      fetch_individual_post(url, news_link, 'h1.article-title', 'div.article-content p', 'time.the-time')
       puts "===== Venture Beat Posts saved! ====="
     end
   end
@@ -89,8 +97,8 @@ namespace :fetch_posts do
       news_link['href'].include?('/blog')
     end
   
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1', 'div#content')
+    news_links.first(10).each do |news_link|
+      fetch_individual_post(url, news_link, 'h1', 'div#content p', 'span.f-meta-2')
       puts "===== OpenAI Blog Posts saved! ====="
     end
   end  
@@ -100,8 +108,8 @@ namespace :fetch_posts do
     parsed_page = fetch_and_parse(url)
     news_links = parsed_page.css('h2.entry-title a')
 
-    news_links.first(5).each do |news_link|
-      fetch_individual_post(url, news_link, 'h1.entry-title', 'div.contentwrap p')
+    news_links.first(10).each do |news_link|
+      fetch_individual_post(url, news_link, 'h1.entry-title', 'div.entry-content p', 'time.entry-date')
       puts "===== Synced Review Posts saved! ====="
     end
   end
