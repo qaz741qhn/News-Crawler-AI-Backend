@@ -1,15 +1,18 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
-    auth = request.env["omniauth.auth"]
-
-    user = User.from_omniauth(auth)
-
-    if user.persisted?
-      flash[:notice] = "Successfully logged in with Google!"
-      sign_in_and_redirect user
+    @user = User.from_omniauth(request.env['omniauth.auth'])
+    puts "============request.env['omniauth.auth']: #{request.env['omniauth.auth']}=========="
+    if @user.persisted?
+      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
     else
-      flash[:alert] = "Error while logging in with Google."
-      redirect_to new_user_registration_url
+      session['devise.google_data'] = request.env['omniauth.auth'].except(:extra) # Removing extra as it can overflow some session stores
+      redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
     end
   end
+
+  def passthru
+    redirect_to root_path, alert: 'Authentication provider not recognized.'
+  end  
+  
 end

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  # Tick Tock Task
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
+  delete '/users/sign_out', to: 'users/sessions#destroy'
 
-  get '/', to: 'home#index'
+  root 'home#index'
   
   # Job application
   resources :job_applications do
@@ -21,7 +24,5 @@ Rails.application.routes.draw do
   post '/detect_available_languages', to: 'code_conversion#detect_available_languages'
   post '/convert_code', to: 'code_conversion#convert_code'
 
-  # Tick Tock Task
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
 end
