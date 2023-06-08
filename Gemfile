@@ -43,6 +43,10 @@ gem 'json'
 gem 'openai', '~> 0.3.0'
 gem 'rack-cors', :require => 'rack/cors'
 
+# Tick Tock Task
+gem 'devise'
+gem 'omniauth-google-oauth2'
+
 gem 'dotenv-rails', groups: [:development, :test]
 
 group :development, :test do
