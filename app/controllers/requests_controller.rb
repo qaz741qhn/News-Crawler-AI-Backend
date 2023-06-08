@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
     @response = generator.completions(
       engine: "text-davinci-003",
       prompt: "Please provide a sample code snippet demonstrating #{operation} in #{language}.",
-      max_tokens: 1000
+      max_tokens: 700
     )
   end
 end

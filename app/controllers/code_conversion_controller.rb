@@ -19,7 +19,7 @@ class CodeConversionController < ApplicationController
     @response = detecter.completions(
       engine: "text-davinci-003",
       prompt: "What other programming languages can the following code be converted to? \n#{source_code}\nList the original code's language, and every possible target language in a Ruby hash, there is no limit! For example: {'detected_language' => 'Ruby', 'available_languages' => ['Python', 'Java', 'C++', ...]}",
-      max_tokens: 1000
+      max_tokens: 700
     )
   end
 
@@ -31,7 +31,7 @@ class CodeConversionController < ApplicationController
     @response = converter.completions(
       engine: "text-davinci-003",
       prompt: "Convert the following code to #{target_language} code:\n#{source_code}",
-      max_tokens: 1000
+      max_tokens: 700
     )
   end
 end
