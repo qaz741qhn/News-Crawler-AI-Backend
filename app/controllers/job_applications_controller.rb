@@ -36,7 +36,7 @@ class JobApplicationsController < ApplicationController
       @response = generator.completions(
         engine: "text-davinci-003",
         prompt: prompt,
-        max_tokens: 700
+        max_tokens: 1000
       )
     end
 end
