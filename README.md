@@ -1,35 +1,33 @@
-# NewsCrawlerAI
+# Unified API Repository
 
-NewsCrawlerAI is an AI-driven news crawler designed specifically for AI and tech enthusiasts. It can automatically fetch news from multiple top AI and tech websites, and uses the capabilities of OpenAI GPT-4 to generate a summary for each news, allowing users to quickly understand the content of the news. Moreover, its powerful features include deduplication, to avoid storing duplicate news in the database.
+This repository serves as a backend API provider for the following three applications:
 
-## Features
+1. [Code Assistant](#code-assistant)
+2. [Job Interview Generator](#job-interview-generator)
+3. [AI News Digest](#ai-news-digest)
 
-1. Fetch news from multiple AI and tech websites.
-2. Generate summaries for each news using OpenAI GPT-3.
-3. Deduplicate news based on their URLs.
-4. Save news and summaries to a database for later usage.
+These applications leverage the power of artificial intelligence to provide unique, user-oriented features, aiming to enhance productivity, preparation, and knowledge acquisition.
 
-## Prerequisites
+## Code Assistant
 
-1. Ruby version 2.7.0 or later.
-2. Rails version 6.0.0 or later.
-3. An OpenAI API key.
+The Code Assistant is an application offering two major features - a Code Generator and a Code Converter. 
 
-## Setup
+- The Code Generator aids in generating boilerplate code for a variety of programming languages.
+- The Code Converter helps in converting source code from one language to another.
 
-1. Clone the repository to your local machine.
-2. Install the required gems by running `bundle install`.
-3. Setup your database by running `rails db:migrate`.
-4. Add your OpenAI API key to the `.env` file.
+Please visit the [Code Assistant](https://code-assistant-frontend.vercel.app/) for more details.
 
-## Usage
+## Job Interview Generator
 
-To start the crawler, run `rake fetch_all_posts`. The task will start to fetch and summarize news from multiple sources, and save them into the database.
+The Job Interview Generator is an innovative tool designed to help users prepare for job interviews. 
 
-## Contributing
+- It generates a custom self-introduction and interview questions based on provided keywords.
+- It maintains a history of all generated content, allowing users to track their progress and revisit past material.
 
-Please feel free to fork this repository and submit pull requests. We appreciate your contribution to the improvement of NewsCrawlerAI.
+Check out the [Job Interview Generator](https://job-intro-questions-generator.vercel.app/) for more information.
 
-## License
+## AI News Digest
 
-This project is licensed under the MIT License.
+AI News Digest is a frontend application that presents the latest AI news and learning materials to its users. It serves as a knowledge hub, helping users understand the complex technology behind the news. 
+
+The instructions to set up and run this project can be found at the [AI News Digest](https://news-crawler-ai.vercel.app/).
