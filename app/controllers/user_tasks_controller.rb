@@ -19,7 +19,7 @@ class UserTasksController < ApplicationController
       if @user_task.save
         render json: @user_task, status: :created, location: @user_task
       else
-        render json: @user_task.errors, status: :unprocessable_entity
+        render json: { error: @user_task.errors }, status: :unprocessable_entity
       end
     else
       render json: { error: "User not logged in" }, status: :unauthorized
