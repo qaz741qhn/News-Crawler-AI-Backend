@@ -1,4 +1,5 @@
 class UserTasksController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_user_task, only: %i[show update destroy]
 
   def index
@@ -12,14 +13,18 @@ class UserTasksController < ApplicationController
   end
 
   def create
-    @user_task = UserTask.new(user_task_params)
-
-    if @user_task.save
-      render json: @user_task, status: :created, location: @user_task
+    if current_user
+      @user_task = current_user.user_tasks.new(user_task_params)
+    
+      if @user_task.save
+        render json: @user_task, status: :created, location: @user_task
+      else
+        render json: @user_task.errors, status: :unprocessable_entity
+      end
     else
-      render json: @user_task.errors, status: :unprocessable_entity
+      render json: { error: "User not logged in" }, status: :unauthorized
     end
-  end
+  end   
 
   def update
     if @user_task.update(user_task_params)
