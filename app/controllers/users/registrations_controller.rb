@@ -1,4 +1,3 @@
-# 在 app/controllers/users/registrations_controller.rb 文件中
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |resource|
@@ -6,5 +5,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
         puts "============== User Creation Error: #{resource.errors.full_messages.join("\n")} =============="
       end
     end
+  end
+
+  private
+
+  def set_flash_message!(*args)
+    # Do nothing. We don't want to use flash in API mode.
   end
 end
