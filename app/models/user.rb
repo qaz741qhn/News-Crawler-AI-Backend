@@ -2,6 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates_presence_of :email
+  has_many :user_tasks
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

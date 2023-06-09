@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Tick Tock Task
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   delete '/users/sign_out', to: 'users/sessions#destroy'
+  resources :user_tasks
 
   root 'home#index'
   
