@@ -46,6 +46,6 @@ class UserTasksController < ApplicationController
   end
 
   def user_task_params
-    params.require(:user_task).permit(:title, :detail, :status)
+    params.require(:user_task).permit(:title, :detail, :status, :from_date_time, :to_date_time)
   end
 end
