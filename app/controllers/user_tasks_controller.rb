@@ -13,6 +13,7 @@ class UserTasksController < ApplicationController
   end
 
   def create
+    puts "=====Current user is #{current_user.inspect}====="
     if current_user
       @user_task = current_user.user_tasks.new(user_task_params)
     
