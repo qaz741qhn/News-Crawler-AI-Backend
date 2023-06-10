@@ -23,7 +23,7 @@ module AiNews
         resource '*',
           :headers => :any,
           :methods => [:get, :post, :delete, :put, :patch, :options, :head],
-          :credentials => false
+          :credentials => true
       end
     end   
   end
