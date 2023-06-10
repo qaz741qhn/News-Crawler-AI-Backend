@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_09_115242) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_10_122845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -33,6 +33,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_115242) do
     t.text "abilities"
     t.text "professional_values_interests"
     t.text "soft_skills"
+  end
+
+  create_table "jwt_denylist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "exp", precision: nil, null: false
+    t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
   create_table "news", force: :cascade do |t|
