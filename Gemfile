@@ -46,6 +46,7 @@ gem 'rack-cors', :require => 'rack/cors'
 # Tick Tock Task
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem 'devise-jwt'
 
 gem 'dotenv-rails', groups: [:development, :test]
 

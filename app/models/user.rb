@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :omniauthable, omniauth_providers: [:google_oauth2]
+  devise :database_authenticatable, :registerable, :omniauthable, omniauth_providers: [:google_oauth2],
+         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   validates_presence_of :email
   has_many :user_tasks
