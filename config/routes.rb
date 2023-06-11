@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   resources :generated_histories, only: [:index, :create, :show]
 
   # AI News
-  resources :news, only: [:index, :show]
+  resources :news, only: [:index, :show] do
+    member do
+      post :translate
+    end
+  end
   resources :visits, only: [:create]
 
   # Code Assistant
