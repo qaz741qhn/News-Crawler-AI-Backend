@@ -12,5 +12,14 @@ class ApplicationController < ActionController::API
       end
     end
   end
-  
+
+  private
+
+  def token_present?
+    !!request.headers['Authorization']
+  end
+
+  def token
+    request.headers['Authorization'].split(' ')[1]
+  end
 end

@@ -3,6 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do |resource|
       if resource.errors.any?
         puts "============== User Creation Error: #{resource.errors.full_messages.join("\n")} =============="
+      else
+        puts "============== User Created! #{resource.inspect} =============="
       end
     end
   end
