@@ -1,0 +1,2 @@
+class NpbNews < ApplicationRecord
+end

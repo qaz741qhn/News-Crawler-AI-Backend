@@ -103,6 +103,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
+    fileutils (1.7.1)
     globalid (1.1.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -247,6 +248,7 @@ DEPENDENCIES
   devise
   devise-jwt
   dotenv-rails
+  fileutils
   httparty
   json
   nokogiri
