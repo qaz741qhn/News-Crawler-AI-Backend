@@ -1,4 +1,4 @@
-class NpbNews
+class NpbNews < ApplicationController
   before_action :find_news, only: [:show]
 
   def index
