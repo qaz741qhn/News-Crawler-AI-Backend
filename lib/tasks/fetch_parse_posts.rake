@@ -161,7 +161,7 @@ namespace :fetch_ai_news_posts do
     parsed_page = fetch_and_parse(url)
     news_links = parsed_page.css('h2.entry-title a')
 
-    news_links.first(10).each do |news_link|
+    news_links.first(5).each do |news_link|
       fetch_individual_ai_news_post(url, news_link, 'h1.entry-title', 'div.entry-content p', 'time.entry-date')
       puts "===== Synced Review Posts saved! ====="
     end
