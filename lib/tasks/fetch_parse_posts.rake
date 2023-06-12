@@ -209,8 +209,28 @@ namespace :fetch_npb_news_posts do
       ['https://full-count.jp/category/npb/pacific-league/lotte/', 'div.l-main__content-primary a', 'ロッテのフルカウント', 'h1', 'div.c-wp-post p', 'figure.s-entry-header__pic img', "meta[property='article:published_time'] content"],
       ['https://www.nikkansports.com/baseball/professional/team/marines/news/', 'ul.newslist a', 'ロッテの日刊スポーツ', 'h1', 'div.article-body p', 'div.article-photo-area img', 'header.article-title time'],
       ['https://www.sponichi.co.jp/baseball/tokusyu/marines/', 'li.cateBaseball a', 'ロッテのスポニチ', 'h1', "div[data-component='article-body'] p", 'span.bg img', 'p[data-component="date-format"]']
-    ]
-    # Other teams...
+    ],
+    'rakuten' => [
+      ['https://hochi.news/tag/%E6%A5%BD%E5%A4%A9', 'li.newslist__item a', '楽天のスポーツ報知', 'h1', 'div.preview__detail p', 'div.preview__image img', "meta[itempop='datePublished'] content"],
+      ['https://www.sanspo.com/tag/npb/eagles/', 'div.storycard-feed__content a', '楽天のサンスポ', 'h1', 'p.article__text', 'figure.article__image img', 'p[data-component="date-format"]'],
+      ['https://full-count.jp/category/npb/pacific-league/rakuten/', 'div.l-main__content-primary a', '楽天のフルカウント', 'h1', 'div.c-wp-post p', 'figure.s-entry-header__pic img', "meta[property='article:published_time'] content"],
+      ['https://www.nikkansports.com/baseball/professional/team/eagles/news/', 'ul.newslist a', '楽天の日刊スポーツ', 'h1', 'div.article-body p', 'div.article-photo-area img', 'header.article-title time'],
+      ['https://www.sponichi.co.jp/baseball/tokusyu/eagles/', 'li.cateBaseball a', '楽天のスポニチ', 'h1', "div[data-component='article-body'] p", 'span.bg img', 'p[data-component="date-format"]']
+    ],
+    'nipponham' => [
+      ['https://hochi.news/tag/%E6%97%A5%E6%9C%AC%E3%83%8F%E3%83%A0', 'li.newslist__item a', '日本ハムのスポーツ報知', 'h1', 'div.preview__detail p', 'div.preview__image img', "meta[itempop='datePublished'] content"],
+      ['https://www.sanspo.com/tag/npb/fighters/', 'div.storycard-feed__content a', '日本ハムのサンスポ', 'h1', 'p.article__text', 'figure.article__image img', 'p[data-component="date-format"]'],
+      ['https://full-count.jp/category/npb/pacific-league/nipponham/', 'div.l-main__content-primary a', '日本ハムのフルカウント', 'h1', 'div.c-wp-post p', 'figure.s-entry-header__pic img', "meta[property='article:published_time'] content"],
+      ['https://www.nikkansports.com/baseball/professional/team/fighters/news/', 'ul.newslist a', '日本ハムの日刊スポーツ', 'h1', 'div.article-body p', 'div.article-photo-area img', 'header.article-title time'],
+      ['https://www.sponichi.co.jp/baseball/tokusyu/fighters/', 'li.cateBaseball a', '日本ハムのスポニチ', 'h1', "div[data-component='article-body'] p", 'span.bg img', 'p[data-component="date-format"]']
+    ],
+    'seibu' => [
+      ['https://hochi.news/tag/%E8%A5%BF%E6%AD%A6', 'li.newslist__item a', '西武のスポーツ報知', 'h1', 'div.preview__detail p', 'div.preview__image img', "meta[itempop='datePublished'] content"],
+      ['https://www.sanspo.com/tag/npb/lions/', 'div.storycard-feed__content a', '西武のサンスポ', 'h1', 'p.article__text', 'figure.article__image img', 'p[data-component="date-format"]'],
+      ['https://full-count.jp/category/npb/pacific-league/seibu/', 'div.l-main__content-primary a', '西武のフルカウント', 'h1', 'div.c-wp-post p', 'figure.s-entry-header__pic img', "meta[property='article:published_time'] content"],
+      ['https://www.nikkansports.com/baseball/professional/team/lions/news/', 'ul.newslist a', '西武の日刊スポーツ', 'h1', 'div.article-body p', 'div.article-photo-area img', 'header.article-title time'],
+      ['https://www.sponichi.co.jp/baseball/tokusyu/lions/', 'li.cateBaseball a', '西武のスポニチ', 'h1', "div[data-component='article-body'] p", 'span.bg img', 'p[data-component="date-format"]']
+    ],
   }
 
   teams.each do |team, news_sources|
