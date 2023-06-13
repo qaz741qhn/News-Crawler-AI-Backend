@@ -3,9 +3,9 @@ class NpbNewsController < ApplicationController
 
   def index
     if params[:team_name]
-      @npb_news = NpbNews.where(team_name: params[:team_name])
+      @npb_news = NpbNews.where(team_name: params[:team_name]).order(created_at: :desc)
     else
-      @npb_news = NpbNews.all
+      @npb_news = NpbNews.all.order(created_at: :desc)
     end
     render json: @npb_news
   end
