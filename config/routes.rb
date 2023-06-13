@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   end
   resources :visits, only: [:create]
 
+  resources :npb_news, only: [:index, :show]
+
   # Code Assistant
   post '/generate', to: 'requests#create'
   get '/capabilities', to: 'capabilities#index'
