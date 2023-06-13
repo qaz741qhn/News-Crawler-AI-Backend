@@ -2,7 +2,11 @@ class NpbNewsController < ApplicationController
   before_action :find_news, only: [:show]
 
   def index
-    @npb_news = NpbNews.all
+    if params[:team_name]
+      @npb_news = NpbNews.where(team_name: params[:team_name])
+    else
+      @npb_news = NpbNews.all
+    end
     render json: @npb_news
   end
 
