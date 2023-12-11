@@ -3,8 +3,10 @@ class CodeConversionController < ApplicationController
   def detect_available_languages
     detecter
     languages = eval(@response.choices.first.text.strip)
+    p "languages: #{languages}"
+    p "response: #{@response}"
     render json: { detected_language: languages['detected_language'], available_languages: languages['available_languages']  }
-  end 
+  end
 
   def convert_code
     converter
